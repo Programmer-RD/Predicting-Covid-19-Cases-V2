@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        body {
+            background-color: lightgrey !important;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="icon" href="https://p2.hiclipart.com/preview/454/357/98/covid19-coronavirus-virus-logo-png-clipart.jpg">
+    <title>Predicting Covid19 Cases</title>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            <h4><b>{{ message }}</b></h4>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <center>
+        <br>
+        <h1><b>Predicting Covid19 Cases and Recoverd and Deaths *Total*</b></h1>
+        <h5><b>The prediction may change. The model only can predict for around 190 countries.</b></h5>
+        <img src="https://www.countdown2030europe.org/storage/app/media/uploaded-files/rotating-globe-slow.gif"
+            alt="" />
+        <br>
+        <form action="" method="POST" class="container">
+            <div class="mb-3">
+                <label for="Date" class="form-label">Date</label>
+                <input required name="D" type="date" class="form-control" id="Date">
+              </div>
+              <select required name="C" class="form-select">
+                <option selected>Select Country</option>
+                {% for show_value,value in zip(list(json_info.keys()),list(json_info.values())): %}
+                <option value="{{value}}">{{show_value}}</option>
+                {% endfor %}
+              </select>
+              <br>
+              <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        <br>
+    </center>
+    <footer class="footer">
+        <h4><b>
+                Copyright © 2020 Programmer-RD
+            </b></h4>
+    </footer>
+</body>
+
+</html>
